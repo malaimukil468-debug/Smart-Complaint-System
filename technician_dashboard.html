@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technician Dashboard - Smart Complaint</title>
+    <link rel="stylesheet" href="/static/css/global.css">
+    <style>
+        body {
+            background-image: url("/static/images/user_dashboard.png");
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-brand">TECHNICIAN DASHBOARD</div>
+        <div class="navbar-nav">
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h2 style="margin: 0; color: #00ff88;">My Assigned Complaints</h2>
+        </div>
+
+        <div class="glass-container dashboard-card" style="border-top: 4px solid #00ff88;">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Rating</th>
+                            <th>Feedback</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in complaints %}
+                        <tr>
+                            <td>{{ c.user_name }}</td>
+                            <td>{{ c.category }}</td>
+                            <td>{{ c.description }}</td>
+                            <td>
+                                <span
+                                    class="badge {% if c.status=='Pending' %}badge-pending{% elif c.status=='In Progress' %}badge-in-progress{% else %}badge-resolved{% endif %}">
+                                    {{ c.status }}
+                                </span>
+                            </td>
+                            <td>
+                                {% if c.rating %}
+                                <span style="color: #ffd700;">★</span> {{ c.rating }}/5
+                                {% else %}
+                                <span class="text-muted">—</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if c.feedback %}{{ c.feedback }}{% else %}<span class="text-muted">—</span>{% endif
+                                %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

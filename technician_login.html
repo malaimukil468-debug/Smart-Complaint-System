@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technician Login - Smart Complaint</title>
+    <link rel="stylesheet" href="/static/css/global.css">
+    <style>
+        body {
+            background-image: url("/static/images/user_dashboard.png");
+        }
+
+        .btn-tech {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+        }
+
+        .btn-tech:hover {
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-wrapper">
+        <div class="glass-container auth-card" style="border-top: 4px solid #00ff88;">
+            <h2 class="text-center mb-4"
+                style="background: linear-gradient(135deg, #1DB954, #1AA34A); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                TECHNICIAN LOGIN</h2>
+            <p class="auth-subtitle">Welcome back</p>
+
+            <form action="/technician_login" method="post">
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" placeholder="Email address" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-tech btn-block mt-3">LOGIN</button>
+            </form>
+
+            <div class="mt-4 pt-3 text-center" style="border-top: 1px solid var(--glass-border); font-size: 12px;">
+                <a href="/" style="color: var(--text-secondary);">Return Home</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

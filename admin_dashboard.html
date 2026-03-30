@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Smart Complaint</title>
+    <link rel="stylesheet" href="/static/css/global.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div class="navbar">
+        <div class="navbar-brand">ADMIN DASHBOARD</div>
+        <div class="navbar-nav">
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="dashboard-container">
+        <div class="glass-container dashboard-card">
+
+            {% if pending_users %}
+            <h3 style="color: white; margin-bottom: 10px;">Pending Users awaiting approval</h3>
+            <div class="table-responsive" style="margin-bottom: 30px;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for u in pending_users %}
+                        <tr>
+                            <td>{{ u.user_id }}</td>
+                            <td>{{ u.name }}</td>
+                            <td>{{ u.email }}</td>
+                            <td>
+                                <form action="/approve_user/{{ u.user_id }}" method="post" class="m-0">
+                                    <button type="submit" class="btn btn-primary btn-sm">Approve</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+
+            <h3 style="color: white; margin-bottom: 10px;">All Complaints</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Rating</th>
+                            <th>Feedback</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in complaints %}
+                        <tr>
+                            <td>{{ c.user_name }}</td>
+                            <td>{{ c.category }}</td>
+                            <td>{{ c.description }}</td>
+                            <td>
+                                <span
+                                    class="badge {% if c.status=='Pending' %}badge-pending{% elif c.status=='In Progress' %}badge-in-progress{% else %}badge-resolved{% endif %}">
+                                    {{ c.status }}
+                                </span>
+                            </td>
+                            <td>
+                                {% if c.rating %}
+                                <span style="color: #ffd700;">★</span> {{ c.rating }}/5
+                                {% else %}
+                                <span class="text-muted">—</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if c.feedback %}
+                                {{ c.feedback }}
+                                {% else %}
+                                <span class="text-muted">—</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <form action="/update_status/{{ c.complaint_id }}" method="post"
+                                    class="flex gap-2 items-center">
+                                    <select name="status" class="form-control" style="width: 140px; padding: 8px;">
+                                        <option {% if c.status=='Pending' %}selected{% endif %}>Pending</option>
+                                        <option {% if c.status=='In Progress' %}selected{% endif %}>In Progress</option>
+                                        <option {% if c.status=='Resolved' %}selected{% endif %}>Resolved</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

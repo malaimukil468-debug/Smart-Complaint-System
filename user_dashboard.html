@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Smart Complaint</title>
+    <link rel="stylesheet" href="/static/css/global.css">
+    <style>
+        body {
+            background-image: url("/static/images/user_dashboard.png");
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-brand">SMART COMPLAINT</div>
+        <div class="navbar-nav">
+            <a href="/my_complaints">My Complaints</a>
+            <a href="/logout" style="color: #ff4d4d;">Logout</a>
+        </div>
+    </div>
+
+    <div class="dashboard-container" style="max-width: 800px;">
+        <div class="glass-container dashboard-card">
+            <h3 style="margin-top: 0; margin-bottom: 25px; color: var(--primary-color);">Raise a New Complaint</h3>
+
+            <form action="/add_complaint" method="post">
+                <div class="form-group">
+                    <input type="text" name="category" class="form-control"
+                        placeholder="Complaint Category (e.g., Electrical, Plumbing)" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="description" class="form-control"
+                        placeholder="Please describe your complaint in detail..." required
+                        style="min-height: 120px; resize: vertical;"></textarea>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                    <a href="/my_complaints" style="font-size: 14px; text-decoration: underline;">View Previous</a>
+                    <button type="submit" class="btn btn-primary">Submit Complaint</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

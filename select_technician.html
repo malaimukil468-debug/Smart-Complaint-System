@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Technician - Smart Complaint</title>
+    <link rel="stylesheet" href="/static/css/global.css">
+    <style>
+        body {
+            background-image: url("/static/images/technision_selection.png");
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-brand">SMART COMPLAINT</div>
+        <div class="navbar-nav">
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="dashboard-container" style="max-width: 900px; display: flex; align-items: center;">
+        <div class="glass-container dashboard-card" style="width: 100%;">
+            <h2 class="text-center mb-4" style="color: var(--primary-color);">Select a Technician</h2>
+
+            <div class="table-responsive">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">Department</th>
+                            <th style="text-align: center;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in technicians %}
+                        <tr>
+                            <td>{{ t.name }}</td>
+                            <td>{{ t.department }}</td>
+                            <td>
+                                <a href="/complaint/{{ t.technician_id }}" class="btn btn-primary btn-sm"
+                                    style="background: linear-gradient(135deg, #1DB954, #1AA34A);">
+                                    Select
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

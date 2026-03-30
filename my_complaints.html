@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Complaints - Smart Complaint</title>
+    <link rel="stylesheet" href="/static/css/global.css">
+    <style>
+        body {
+            background-image: url("/static/images/my_complaint.png");
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-brand">MY COMPLAINTS</div>
+        <div class="navbar-nav">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+
+        <div class="glass-container dashboard-card">
+            <h2 class="record-title mb-4" style="color: var(--primary-color);">Complaint History</h2>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in complaints %}
+                        <tr>
+                            <td>{{ c.category }}</td>
+                            <td>{{ c.description }}</td>
+                            <td>
+                                <span
+                                    class="badge {% if c.status=='Pending' %}badge-pending{% elif c.status=='In Progress' %}badge-in-progress{% else %}badge-resolved{% endif %}">
+                                    {{ c.status }}
+                                </span>
+                            </td>
+                            <td>{{ c.created_at }}</td>
+                        </tr>
+
+                        {% if c.status == 'Resolved' and c.rating is none %}
+                        <tr>
+                            <td colspan="4" style="background: rgba(0, 0, 0, 0.2);">
+                                <div style="max-width: 500px; margin: 15px auto; text-align: left;">
+                                    <h4 style="margin-bottom: 15px; color: #fff;">Provide Feedback</h4>
+                                    <form action="/submit_feedback/{{ c.complaint_id }}" method="post">
+                                        <div class="form-group">
+                                            <select name="rating" class="form-control" required>
+                                                <option value="" disabled selected>Select Rating</option>
+                                                <option value="1">⭐ 1/5 - Poor</option>
+                                                <option value="2">⭐⭐ 2/5 - Fair</option>
+                                                <option value="3">⭐⭐⭐ 3/5 - Good</option>
+                                                <option value="4">⭐⭐⭐⭐ 4/5 - Very Good</option>
+                                                <option value="5">⭐⭐⭐⭐⭐ 5/5 - Excellent</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea name="feedback" class="form-control"
+                                                placeholder="Share your experience..." required
+                                                style="min-height: 80px;"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Submit
+                                            Feedback</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endif %}
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4 text-center">
+                <a href="/dashboard" style="font-size: 14px; text-decoration: underline;">&larr; Back to Dashboard</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Smart Complaint</title>
+    <link rel="stylesheet" href="/static/css/global.css">
+</head>
+<body>
+
+    <div class="auth-wrapper">
+        <div class="glass-container auth-card">
+            <h1 class="auth-title">SMART COMPLAINT</h1>
+            <p class="auth-subtitle">Secure Digital Platform</p>
+            
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" placeholder="Email address" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-3">Sign In</button>
+            </form>
+            
+            <div class="mt-4" style="font-size: 13px; color: var(--text-secondary);">
+                New here? <a href="/register">Create account</a>
+            </div>
+            
+            <div class="mt-4 flex justify-between" style="font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--glass-border); padding-top: 15px;">
+                <a href="/admin" style="color: var(--text-muted);">Admin Portal</a>
+                <a href="/technician" style="color: var(--text-muted);">Technician Portal</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
